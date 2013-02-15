@@ -9,13 +9,16 @@ class Ubiquo::CategoriesController < UbiquoController
   def index
     order_by = params[:order_by] || 'categories.name'
     sort_order = params[:sort_order] || 'ASC'
+    per_page = params[:per_page].to_i
     
     filters = {
       "filter_category_set" => params[:category_set_id],
-      "per_page" => Ubiquo::Config.context(:ubiquo_categories).get(:categories_per_page),
+      "per_page" => per_page > 0 ? per_page : Ubiquo::Config.context(:ubiquo_categories).get(:categories_per_page),
       "order_by" => order_by,
       "sort_order" => sort_order
     }.merge(uhook_index_filters)
+
+
 
     @categories_pages, @categories = uhook_index_search_subject.paginated_filtered_search(params.merge(filters))
 
