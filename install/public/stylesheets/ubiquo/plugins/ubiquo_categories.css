@@ -259,6 +259,9 @@ div.list-token-input-dropdown p {
 div.list-token-input-dropdown ul {
     margin: 0;
     padding: 0;
+    max-height: 18.2em;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 div.list-token-input-dropdown ul li {

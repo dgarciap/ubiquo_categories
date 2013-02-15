@@ -150,6 +150,11 @@ module UbiquoCategories
         output
       end
 
+
+      # This constant contains the number of instances retrieved by the auto-complete selector when
+      # the option size = :many (value by default) is used.
+      SIZE_WHEN_MANY = 30
+
       def category_autocomplete_selector(object, object_name, key, categories, set, options = {})
         style = options[:autocomplete_style] || "tag"
         unless ["list", "tag"].include?(style)
@@ -169,7 +174,7 @@ module UbiquoCategories
           :style => style
         }
         obj_size = object.class.instance_variable_get(:@categorized_with_options)[key][:size] || :many
-        size = (obj_size == :many ? 'null' : obj_size.to_i)
+        size = (obj_size == :many ? SIZE_WHEN_MANY : obj_size.to_i)
 
         js_autocomplete =<<-JS
           var autocomplete = new AutoCompleteSelector(

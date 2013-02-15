@@ -687,7 +687,7 @@ var AutoCompleteSelector = Class.create({
         klass.cache.add(query, results.responseText.evalJSON(true));
         klass.populate_dropdown(query, results.responseText.evalJSON(true));
       };
-      new Ajax.Response(new Ajax.Request(this.categories_url + queryStringDelimiter + "filter_text" + "=" + query, {method: "get", asynchronous: false, onSuccess: callback}));
+      new Ajax.Response(new Ajax.Request(this.categories_url + queryStringDelimiter + "filter_text" + "=" + query + "&per_page=" + this.tokenLimit, {method: "get", asynchronous: false, onSuccess: callback}));
     }
   }
 });
